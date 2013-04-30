@@ -64,17 +64,16 @@ end
 
 function CheckUsingBlockItem(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, CursorY, CursorZ, BlockType)
 	World = Player:GetWorld()
-	Block = World:GetBlock( BlockX, BlockY, BlockZ )
-	
+	Block = World:GetBlock( BlockX, BlockY, BlockZ )	
 	if Block == 23 or Block == 54 or Block == 64 or Block == 61 or Block == 62 or Block == 96 then
 		if World:GetBlock( BlockX + 1, BlockY, BlockZ ) == 68 then
-			if World:GetBlockMeta( BlockX + 1, BlockY, BlockZ ) == 4 then
+			if World:GetBlockMeta( BlockX + 1, BlockY, BlockZ ) == 5 then
 				Read, Line1, Line2, Line3, Line4 = World:GetSignLines( BlockX + 1, BlockY, BlockZ, "", "", "", "" )
 			else
 				return false
 			end
 		elseif World:GetBlock( BlockX - 1, BlockY, BlockZ ) == 68 then
-			if World:GetBlockMeta( BlockX - 1, BlockY, BlockZ ) == 5 then
+			if World:GetBlockMeta( BlockX - 1, BlockY, BlockZ ) == 4 then
 				Read, Line1, Line2, Line3, Line4 = World:GetSignLines( BlockX - 1, BlockY, BlockZ, "", "", "", "" )
 			else
 				return false

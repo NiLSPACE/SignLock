@@ -11,7 +11,6 @@ function Initialize( Plugin )
 	if LoadSettings() == true then
 		LOGWARN( "Error while loading settings" )
 	end
-	print(ShowAdminBreach)
 	LOG("Initialized " .. PLUGIN:GetName() .. " v" .. PLUGIN:GetVersion())
 	return true
 end

@@ -2,8 +2,6 @@ function OnPlayerUsingBlock(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, 
 	if CheckUsingBlockItem(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, CursorY, CursorZ, BlockType) == true then
 		Player:SendMessage( cChatColor.Rose .. "You do not have permission to open this" )
 		return true
-	elseif CheckUsingBlockItem(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, CursorY, CursorZ, BlockType) == nil then
-		cRoot:Get():GetServer():SendMessage( cChatColor.Rose .. "Player " .. Player:GetName() .. " opened a block owned by somebody else" )
 	end
 end
 
