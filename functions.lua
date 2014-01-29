@@ -1,8 +1,8 @@
-function LoadSettings()
-	SettingsIni = cIniFile( PLUGIN:GetLocalDirectory() .. "/Config.ini" )
-	SettingsIni:ReadFile()
+function LoadSettings(Path)
+	SettingsIni = cIniFile()
+	SettingsIni:ReadFile(Path)
 	ShowAdminBreach = SettingsIni:GetValueSetB( "General", "ShowAdminBreach", false )
-	SettingsIni:WriteFile()
+	SettingsIni:WriteFile(Path)
 	
 	if ShowAdminBreach == nil then
 		return true
