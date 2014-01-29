@@ -43,10 +43,6 @@ function OnUpdatingSign(World, BlockX, BlockY, BlockZ, Line1, Line2, Line3, Line
 		if not Player:HasPermission("SignLock.Create") then
 			return true
 		end
-		if string.len(Player:GetName()) > 15 then
-			Player:SendMessage(cChatColor.Rose .. "Your name is to long.")
-			return true
-		end
 		if CheckBlock(World:GetBlock( BlockX + 1, BlockY, BlockZ )) then
 			if CheckProtect( BlockX + 1, BlockY, BlockZ, World ) then
 				Player:SendMessage( cChatColor.Green .. "This block is already protected" )
