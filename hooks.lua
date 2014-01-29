@@ -19,7 +19,7 @@ function OnPlayerBreakingBlock(Player, BlockX, BlockY, BlockZ, BlockFace, Cursor
 							return true
 						else
 							if ShowAdminBreach == true then
-								cRoot:Get():GetServer():SendMessage( cChatColor.Rose .. "Player " .. Player:GetName() .. " destroyed a SignLock sign owned by somebody else" )
+								cRoot:Get():BroadcastChat( cChatColor.Rose .. "Player " .. Player:GetName() .. " destroyed a SignLock sign owned by somebody else" )
 							end
 						end
 					end
@@ -33,38 +33,42 @@ function OnPlayerBreakingBlock(Player, BlockX, BlockY, BlockZ, BlockFace, Cursor
 		return true
 	elseif CheckUsingBlockItem(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, CursorY, CursorZ, BlockType) == nil then
 		if BlockType == 68 then
-			cRoot:Get():GetServer():SendMessage( cChatColor.Rose .. "Player " .. Player:GetName() .. " destroyed a block owned by somebody else" )
+			cRoot:Get():BroadcastChat( cChatColor.Rose .. "Player " .. Player:GetName() .. " destroyed a block owned by somebody else" )
 		end
 	end
 end
 
 function OnUpdatingSign(World, BlockX, BlockY, BlockZ, Line1, Line2, Line3, Line4, Player)
 	if Line1 == "[SL]" or Line1 == "[SignLock]" then
-		if Player:HasPermission("SignLock.Create") ~= true then
+		if not Player:HasPermission("SignLock.Create") then
 			return true
 		end
-		if CheckBlock(World:GetBlock( BlockX + 1, BlockY, BlockZ )) == true then
+		if string.len(Player:GetName()) > 15 then
+			Player:SendMessage(cChatColor.Rose .. "Your name is to long.")
+			return true
+		end
+		if CheckBlock(World:GetBlock( BlockX + 1, BlockY, BlockZ )) then
 			if CheckProtect( BlockX + 1, BlockY, BlockZ, World ) then
 				Player:SendMessage( cChatColor.Green .. "This block is already protected" )
 				return false, "[?]", "Already", "Protected"
 			end
 			SetSide( BlockX, BlockY, BlockZ, "+X", World )
 		end
-		if CheckBlock(World:GetBlock( BlockX - 1, BlockY, BlockZ )) == true then
+		if CheckBlock(World:GetBlock( BlockX - 1, BlockY, BlockZ )) then
 			if CheckProtect( BlockX - 1, BlockY, BlockZ, World ) then
 				Player:SendMessage( cChatColor.Green .. "This block is already protected" )
 				return false, "[?]", "Already", "Protected"
 			end
 			SetSide( BlockX, BlockY, BlockZ, "-X", World )
 		end
-		if CheckBlock(World:GetBlock( BlockX, BlockY, BlockZ + 1 )) == true then
+		if CheckBlock(World:GetBlock( BlockX, BlockY, BlockZ + 1 )) then
 			if CheckProtect( BlockX, BlockY, BlockZ + 1, World ) then
 				Player:SendMessage( cChatColor.Green .. "This block is already protected" )
 				return false, "[?]", "Already", "Protected"
 			end
 			SetSide( BlockX, BlockY, BlockZ, "+Z", World )
 		end
-		if CheckBlock(World:GetBlock( BlockX, BlockY, BlockZ - 1 )) == true then
+		if CheckBlock(World:GetBlock( BlockX, BlockY, BlockZ - 1 )) then
 			if CheckProtect( BlockX, BlockY, BlockZ - 1, World ) then
 				Player:SendMessage( cChatColor.Green .. "This block is already protected" )
 				return false, "[?]", "Already", "Protected"
